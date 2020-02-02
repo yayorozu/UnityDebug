@@ -2,19 +2,19 @@
 
 ![EditorWindow](https://github.com/yawaLib/ImageUploader/blob/master/UniDebug/Top.png)
 
-UnityEditor で利用できるデバッグメニューツール
+UnityEditor で利用できるデバッグメニューツール  
 ※UIElement が runtime UI に対応したら実機にも表示できるように拡張を行う予定です
 
 * Field
 * Property
-* Method
+* Method  
 に Attribute を追加し登録処理を呼び出すことで EditorWindow に表示されるようになります
 
 パスを指定することができるので機能ごとにまとめて表示させることができます
 
 ## 登録解除
 
-インスタンス生成時に Register を呼び出し 削除時に Release を呼び出すことで
+インスタンス生成時に Register を呼び出し 削除時に Release を呼び出すことで  
 EditorWindow に表示・非表示することができます
 
 ```cs
