@@ -1,9 +1,9 @@
 using System;
 using Object = System.Object;
 using UnityEngine;
-
 #if UNITY_EDITOR
 using UnityEditor;
+
 #endif
 
 namespace UniLib.UniDebug
@@ -12,26 +12,27 @@ namespace UniLib.UniDebug
 	{
 		public readonly Type Type;
 		public readonly string Path;
+		public readonly bool IsReadOnly;
 		public string Name;
-		protected Object[] Parameters = new object[0];
+		protected object[] Parameters = new object[0];
 		protected int Id;
-		
+
 		public DebugAttrInfoAbstract(int id, Type type, DebugAttribute attr)
 		{
 			Id = id;
 			Type = type;
 			Path = attr.Path;
+			IsReadOnly = attr.IsReadonly;
 		}
 
-		public virtual void Invoke(Object target, params Object[] parameters)
+		public virtual void Invoke(object target, params object[] parameters)
 		{
 		}
-		
+
 #if UNITY_EDITOR
-		
 		public abstract void EditorDraw();
 
-		protected Object DrawField(string label, Type type, Object value)
+		protected object DrawField(string label, Type type, object value)
 		{
 			if (type == typeof(int))
 				return EditorGUILayout.IntField(label, (int) value);
@@ -47,21 +48,22 @@ namespace UniLib.UniDebug
 				return EditorGUILayout.Vector3Field(label, (Vector3) value);
 			if (type == typeof(Color))
 				return EditorGUILayout.ColorField(label, (Color) value);
+
 			if (type.IsEnum)
 			{
 				var names = Enum.GetNames(type);
 				var currentName = Enum.GetName(type, value);
-				var index =Array.FindIndex(names, n => n == currentName);
+				var index = Array.FindIndex(names, n => n == currentName);
 				var values = Enum.GetValues(type) as int[];
-				
+
 				return EditorGUILayout.IntPopup(label, index, names, values);
 			}
-			
+
 			EditorGUILayout.LabelField(type + "is invalid");
+
 			return value;
 		}
-		
-#endif
 
+#endif
 	}
 }

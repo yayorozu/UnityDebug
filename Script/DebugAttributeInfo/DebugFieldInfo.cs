@@ -1,8 +1,8 @@
 using System;
 using System.Reflection;
-
 #if UNITY_EDITOR
 using UnityEditor;
+
 #endif
 
 namespace UniLib.UniDebug
@@ -10,7 +10,7 @@ namespace UniLib.UniDebug
 	internal class DebugFieldInfo : DebugAttrInfoAbstract
 	{
 		private readonly FieldInfo _fieldInfo;
-		
+
 		public DebugFieldInfo(int id, Type type, DebugAttribute attr, FieldInfo fieldInfo) : base(id, type, attr)
 		{
 			_fieldInfo = fieldInfo;
@@ -25,7 +25,17 @@ namespace UniLib.UniDebug
 			{
 				if (target.GetInstanceID() != Id)
 					continue;
-				
+
+				if (IsReadOnly)
+				{
+					using (new EditorGUI.DisabledScope(IsReadOnly))
+					{
+						DrawField(Name, _fieldInfo.FieldType, _fieldInfo.GetValue(target));
+					}
+
+					continue;
+				}
+
 				EditorGUI.BeginChangeCheck();
 				var obj = DrawField(Name, _fieldInfo.FieldType, _fieldInfo.GetValue(target));
 				if (EditorGUI.EndChangeCheck())
@@ -34,6 +44,5 @@ namespace UniLib.UniDebug
 		}
 
 #endif
-		
 	}
 }

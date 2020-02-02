@@ -1,7 +1,6 @@
 using System;
 using System.Reflection;
 using UnityEngine;
-using Object = System.Object;
 
 namespace UniLib.UniDebug
 {
@@ -11,17 +10,16 @@ namespace UniLib.UniDebug
 		private readonly ParameterInfo[] _parameterInfos;
 		private readonly string[] _args;
 		private readonly object[] _defineParameters;
-		
+
 		public DebugMethodInfo(int id, Type type, DebugAttribute attr, MethodInfo methodInfo) : base(id, type, attr)
 		{
-			Debug.LogError(attr.Name);
 			Name = string.IsNullOrEmpty(attr.Name) ? methodInfo.Name : attr.Name;
-			
+
 			_methodInfo = methodInfo;
-			var methodAttr = (attr as DebugMethodAttribute);
+			var methodAttr = attr as DebugMethodAttribute;
 			_args = methodAttr.Args;
 			_defineParameters = methodAttr.Parameters;
-			
+
 			_parameterInfos = methodInfo.GetParameters();
 			Parameters = new object[_parameterInfos.Length];
 			for (var i = 0; i < _parameterInfos.Length; i++)
@@ -31,11 +29,11 @@ namespace UniLib.UniDebug
 			}
 		}
 
-		public override void Invoke(Object target, params Object[] parameters)
+		public override void Invoke(object target, params object[] parameters)
 		{
 			_methodInfo.Invoke(target, parameters);
 		}
-		
+
 #if UNITY_EDITOR
 
 		public override void EditorDraw()
@@ -49,13 +47,14 @@ namespace UniLib.UniDebug
 				{
 					if (GUILayout.Button(Name))
 						DebugObserver.Invoke(Path, Name, _defineParameters);
+
 					continue;
 				}
-				
+
 				for (var i = 0; i < _parameterInfos.Length; i++)
 					Parameters[i] = DrawField(
 						_args.Length > i ? _args[i] : _parameterInfos[i].Name,
-						_parameterInfos[i].ParameterType, 
+						_parameterInfos[i].ParameterType,
 						Parameters[i]
 					);
 
