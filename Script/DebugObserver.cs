@@ -28,21 +28,27 @@ namespace UniLib.UniDebug
 			var count = 0;
 			foreach (var method in type.GetMethods(Flags).Where(m => m.GetCustomAttributes<DebugMethodAttribute>().Any()))
 			{
-				count++;
-				var attr = method.GetCustomAttribute(typeof(DebugMethodAttribute)) as DebugMethodAttribute;
-				AddDic(attr.Path, new DebugMethodInfo(id, type, attr, method));
+				foreach (var attr in method.GetCustomAttributes<DebugMethodAttribute>())
+				{
+					count++;
+					AddDic(attr.Path, new DebugMethodInfo(id, type, attr, method));
+				}
 			}
 			foreach (var field in type.GetFields(Flags).Where(m => m.GetCustomAttributes<DebugFieldAttribute>().Any()))
 			{
-				count++;
-				var attr = field.GetCustomAttribute(typeof(DebugFieldAttribute)) as DebugFieldAttribute;
-				AddDic(attr.Path, new DebugFieldInfo(id, type, attr, field));
+				foreach (var attr in field.GetCustomAttributes<DebugFieldAttribute>())
+				{
+					count++;
+					AddDic(attr.Path, new DebugFieldInfo(id, type, attr, field));
+				}
 			}
 			foreach (var property in type.GetProperties(Flags).Where(m => m.GetCustomAttributes<DebugPropertyAttribute>().Any()))
 			{
-				count++;
-				var attr = property.GetCustomAttribute(typeof(DebugPropertyAttribute)) as DebugPropertyAttribute;
-				AddDic(attr.Path, new DebugPropertyInfo(id, type, attr, property));
+				foreach (var attr in property.GetCustomAttributes<DebugPropertyAttribute>())
+				{
+					count++;
+					AddDic(attr.Path, new DebugPropertyInfo(id, type, attr, property));
+				}
 			}
 			
 			if (count > 0)

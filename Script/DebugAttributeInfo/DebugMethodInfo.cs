@@ -10,13 +10,18 @@ namespace UniLib.UniDebug
 		private readonly MethodInfo _methodInfo;
 		private readonly ParameterInfo[] _parameterInfos;
 		private readonly string[] _args;
+		private readonly object[] _defineParameters;
 		
 		public DebugMethodInfo(int id, Type type, DebugAttribute attr, MethodInfo methodInfo) : base(id, type, attr)
 		{
+			Debug.LogError(attr.Name);
 			Name = string.IsNullOrEmpty(attr.Name) ? methodInfo.Name : attr.Name;
 			
 			_methodInfo = methodInfo;
-			_args = (attr as DebugMethodAttribute).Args;
+			var methodAttr = (attr as DebugMethodAttribute);
+			_args = methodAttr.Args;
+			_defineParameters = methodAttr.Parameters;
+			
 			_parameterInfos = methodInfo.GetParameters();
 			Parameters = new object[_parameterInfos.Length];
 			for (var i = 0; i < _parameterInfos.Length; i++)
@@ -40,6 +45,13 @@ namespace UniLib.UniDebug
 				if (target.GetInstanceID() != Id)
 					continue;
 
+				if (_parameterInfos.Length > 0 && _defineParameters.Length == _parameterInfos.Length)
+				{
+					if (GUILayout.Button(Name))
+						DebugObserver.Invoke(Path, Name, _defineParameters);
+					continue;
+				}
+				
 				for (var i = 0; i < _parameterInfos.Length; i++)
 					Parameters[i] = DrawField(
 						_args.Length > i ? _args[i] : _parameterInfos[i].Name,
@@ -47,7 +59,7 @@ namespace UniLib.UniDebug
 						Parameters[i]
 					);
 
-				if (GUILayout.Button(_methodInfo.Name))
+				if (GUILayout.Button(Name))
 					DebugObserver.Invoke(Path, Name, Parameters);
 			}
 		}

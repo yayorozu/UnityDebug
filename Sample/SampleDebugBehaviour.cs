@@ -70,6 +70,14 @@ namespace Sample
 			Debug.Log(intValue1);
 			Debug.Log(intValue2);
 		}
+
+		[DebugMethod("TimeScale", "TimeScale1", 1f)]
+		[DebugMethod("TimeScale", "TimeScale2", 2f)]
+		private void TimeScale(float scale)
+		{
+			Time.timeScale = scale;
+			Debug.Log(scale);
+		}
 	}
 }
 
