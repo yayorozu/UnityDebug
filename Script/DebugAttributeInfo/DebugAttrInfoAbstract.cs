@@ -51,14 +51,14 @@ namespace UniLib.UniDebug
 
 			if (type.IsEnum)
 			{
-				var names = Enum.GetNames(type);
-				var currentName = Enum.GetName(type, value);
-				var index = Array.FindIndex(names, n => n == currentName);
-				var values = Enum.GetValues(type) as int[];
-
-				return EditorGUILayout.IntPopup(label, index, names, values);
+				return EditorGUILayout.IntPopup(
+					label, 
+					(int) value, 
+					Enum.GetNames(type), 
+					Enum.GetValues(type) as int[]
+				);
 			}
-
+			
 			EditorGUILayout.LabelField(type + "is invalid");
 
 			return value;
