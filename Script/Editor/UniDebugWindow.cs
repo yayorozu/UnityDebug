@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace UniLib.UniDebug
+namespace Yorozu.UniDebug
 {
 	public class UniDebugWindow : EditorWindow
 	{

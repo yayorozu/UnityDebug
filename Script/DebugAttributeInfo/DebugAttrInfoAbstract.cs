@@ -6,7 +6,7 @@ using UnityEditor;
 
 #endif
 
-namespace UniLib.UniDebug
+namespace Yorozu.UniDebug
 {
 	internal abstract class DebugAttrInfoAbstract
 	{

@@ -1,4 +1,4 @@
-﻿using UniLib.UniDebug;
+﻿using Yorozu.UniDebug;
 using UnityEngine;
 
 namespace Sample

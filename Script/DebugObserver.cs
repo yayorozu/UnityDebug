@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using Object = UnityEngine.Object;
 
-namespace UniLib.UniDebug
+namespace Yorozu.UniDebug
 {
 	public static partial class DebugObserver
 	{

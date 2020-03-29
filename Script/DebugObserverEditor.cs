@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace UniLib.UniDebug
+namespace Yorozu.UniDebug
 {
 	public static partial class DebugObserver
 	{

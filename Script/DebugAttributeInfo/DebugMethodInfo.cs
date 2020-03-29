@@ -2,7 +2,7 @@ using System;
 using System.Reflection;
 using UnityEngine;
 
-namespace UniLib.UniDebug
+namespace Yorozu.UniDebug
 {
 	internal class DebugMethodInfo : DebugAttrInfoAbstract
 	{

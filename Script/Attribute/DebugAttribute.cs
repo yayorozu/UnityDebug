@@ -1,6 +1,6 @@
 using System;
 
-namespace UniLib.UniDebug
+namespace Yorozu.UniDebug
 {
 	[AttributeUsage(AttributeTargets.All)]
 	public class DebugAttribute : Attribute
