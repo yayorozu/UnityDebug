@@ -12,7 +12,7 @@ namespace Yorozu.UniDebug
 		                                     BindingFlags.NonPublic |
 		                                     BindingFlags.Static |
 		                                     BindingFlags.Instance;
-		private static readonly Dictionary<string, List<DebugAttrInfoAbstract>> _dic = new Dictionary<string, List<DebugAttrInfoAbstract>>();
+		internal static readonly Dictionary<string, List<DebugAttrInfoAbstract>> _dic = new Dictionary<string, List<DebugAttrInfoAbstract>>();
 		private static readonly List<Object> _registerObjects = new List<Object>();
 
 		/// <summary>
