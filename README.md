@@ -1,6 +1,6 @@
 # UnityDebug
 
-![EditorWindow](https://github.com/yawaLib/ImageUploader/blob/master/UniDebug/Top.png)
+<img src="https://github.com/yawaLib/ImageUploader/blob/master/UniDebug/Top.png" width="400">
 
 UnityEditor で利用できるデバッグメニューツール  
 ※UIElement が runtime UI に対応したら実機にも表示できるように拡張を行う予定です
